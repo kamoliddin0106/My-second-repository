@@ -8,10 +8,21 @@ public class StudentRepo implements Repository<Student>{
 
     private List<Student>  students;
 
-    private static StudentRepo studentRepo;
+    private static StudentRepo singleton;
 
     public StudentRepo(List<Student> students) {
         this.students = students;
+    }
+
+    public static StudentRepo getInstance(){
+        if(singleton == null){
+            singleton = new StudentRepo(loadData());
+        }
+        return singleton;
+    }
+
+    private static List<Student> loadData() {
+        return null;
     }
 
     @Override
