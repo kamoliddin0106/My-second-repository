@@ -6,6 +6,13 @@ import java.util.List;
 
 public class StudentRepo implements Repository<Student>{
 
+    private List<Student>  students;
+
+    private static StudentRepo studentRepo;
+
+    public StudentRepo(List<Student> students) {
+        this.students = students;
+    }
 
     @Override
     public void save(Student student) {
