@@ -2,6 +2,7 @@ package uz.pdp.lesson_9.homework.db;
 
 import uz.pdp.lesson_9.homework.Student;
 
+import java.io.*;
 import java.util.List;
 
 public class StudentRepo implements Repository<Student>{
@@ -22,6 +23,15 @@ public class StudentRepo implements Repository<Student>{
     }
 
     private static List<Student> loadData() {
+        try (
+                InputStream is = new FileInputStream("src/uz/pdp/lesson_9/homework/db/students_db.txt");
+                ObjectInputStream inputStream = new ObjectInputStream(is);
+
+        ){
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
