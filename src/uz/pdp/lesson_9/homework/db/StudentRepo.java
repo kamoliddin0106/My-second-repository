@@ -6,9 +6,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentRepo implements Repository<Student>{
+public class StudentRepo implements Repository<Student> {
 
-    private List<Student>  students;
+    private static final String PATH = "src/uz/pdp/lesson_9/homework/db/students_db.txt";
+
+    private List<Student> students;
 
     private static StudentRepo singleton;
 
@@ -16,8 +18,8 @@ public class StudentRepo implements Repository<Student>{
         this.students = students;
     }
 
-    public static StudentRepo getInstance(){
-        if(singleton == null){
+    public static StudentRepo getInstance() {
+        if (singleton == null) {
             singleton = new StudentRepo(loadData());
         }
         return singleton;
@@ -26,9 +28,9 @@ public class StudentRepo implements Repository<Student>{
     @SuppressWarnings("unchecked")
     private static List<Student> loadData() {
         try (
-                InputStream is = new FileInputStream("src/uz/pdp/lesson_9/homework/db/students_db.txt");
+                InputStream is = new FileInputStream(PATH);
                 ObjectInputStream inputStream = new ObjectInputStream(is);
-        ){
+        ) {
             return (List<Student>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             return new ArrayList<>();
@@ -37,7 +39,19 @@ public class StudentRepo implements Repository<Student>{
 
     @Override
     public void save(Student student) {
+        students.add(student);
+        uploadData();
+    }
 
+    private void uploadData() {
+        try (
+                OutputStream os = new FileOutputStream(PATH);
+                ObjectOutputStream outputStream = new ObjectOutputStream(os);
+        ) {
+            outputStream.writeObject(students);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
