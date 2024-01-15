@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Student implements Serializable {
     private String name;
-    private String age;
+    private int age;
 
-    public Student(String name, String age) {
+    public Student(String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -19,11 +19,11 @@ public class Student implements Serializable {
         this.name = name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

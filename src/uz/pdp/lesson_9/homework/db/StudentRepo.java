@@ -1,5 +1,6 @@
 package uz.pdp.lesson_9.homework.db;
 
+import uz.pdp.lesson_8.homework.h_2.util.Input;
 import uz.pdp.lesson_9.homework.Student;
 
 import java.io.*;
@@ -56,7 +57,10 @@ public class StudentRepo implements Repository<Student> {
 
     @Override
     public void update(Student student) {
-
+        if (student != null) {
+            student.setName(Input.inputStr("Enter name"));
+            student.setAge(Input.inputInt("Enter age"));
+        }
     }
 
     @Override
