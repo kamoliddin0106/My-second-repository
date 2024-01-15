@@ -64,7 +64,7 @@ public class StudentRepo implements Repository<Student> {
     }
 
     @Override
-    public List<Student> findAll(Student student) {
+    public List<Student> findAll() {
         return students;
     }
 
